@@ -49,7 +49,7 @@ do
     ThemeManager.BuiltInThemes = {
         ["PornHub"] = {
             1,
-            { FontColor = "#ffffff", MainColor = "#000000", AccentColor = "#FF9000", BackgroundColor = "#000000", OutlineColor = "##000000" },
+            { FontColor = "#ffffff", MainColor = "#000000", AccentColor = "#FF9000", BackgroundColor = "#000000", OutlineColor = "#000000" },
         },
           ["AV∅X"] = {
             2,
