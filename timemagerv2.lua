@@ -49,31 +49,31 @@ do
     ThemeManager.BuiltInThemes = {
         ["PornHub"] = {
             1,
-            { FontColor = "#FFFFFF", MainColor = "#1A1A1A", AccentColor = "#FF9000", BackgroundColor = "#0D0D0D", OutlineColor = "#2A2A2A" },
+            { FontColor = "#FFFFFF", MainColor = "#000000", AccentColor = "#FF9000", BackgroundColor = "#0D0D0D", OutlineColor = "##000000" },
         },
           ["AV∅X"] = {
             2,
-            { FontColor = "ffffff", MainColor = "#000000", AccentColor = "#ff0000", BackgroundColor = "#000000", OutlineColor = "#141414" },
+            { FontColor = "#ffffff", MainColor = "#000000", AccentColor = "#ff0000", BackgroundColor = "#000000", OutlineColor = "#000000" },
         },
         ["Fatality"] = {
             3,
-            { FontColor = "ffffff", MainColor = "1e1842", AccentColor = "c50754", BackgroundColor = "191335", OutlineColor = "3c355d" },
+            { FontColor = "#ffffff", MainColor = "#000000", AccentColor = "#c50754", BackgroundColor = "#000000", OutlineColor = "#000000" },
         },
         ["NeverLose"] = {
             4,
-            { FontColor = "#C7D0E0", MainColor = "#0E1624", AccentColor = "#2F74FF", BackgroundColor = "#0A0F1A", OutlineColor = "#1F2A3A" },
+            { FontColor = "#ffffff", MainColor = "#000000", AccentColor = "#2F74FF", BackgroundColor = "#000000", OutlineColor = "#000000" },
         },
         ["LowCortisol"] = {
             5,
-            { FontColor = "ffffff", MainColor = "242424", AccentColor = "3db488", BackgroundColor = "1c1c1c", OutlineColor = "373737" },
+            { FontColor = "#ffffff", MainColor = "#000000", AccentColor = "#3db488", BackgroundColor = "#000000", OutlineColor = "#000000" },
         },
         ["ObsidianLibraly"] = {
             6,
-            { FontColor = "ffffff", MainColor = "191919", AccentColor = "7d55ff", BackgroundColor = "0f0f0f", OutlineColor = "282828" },
+            { FontColor = "#ffffff", MainColor = "#000000", AccentColor = "#7d55ff", BackgroundColor = "#000000", OutlineColor = "#000000" },
         },
         ["Ubuntu"] = {
             7,
-            { FontColor = "ffffff", MainColor = "3e3e3e", AccentColor = "e2581e", BackgroundColor = "323232", OutlineColor = "191919" },
+            { FontColor = "#ffffff", MainColor = "#000000", AccentColor = "#e2581e", BackgroundColor = "#000000", OutlineColor = "#000000" },
         },
         ["SoftPink"] = {
             8,
