@@ -77,7 +77,7 @@ do
         },
         ["SoftPink"] = {
             8,
-            { FontColor = "#FFFFFF", MainColor = "#000000", AccentColor = "#FFB6C1", BackgroundColor = "#000000", OutlineColor = "#141414" },
+            { FontColor = "#FFFFFF", MainColor = "#000000", AccentColor = "#FFB6C1", BackgroundColor = "#000000", OutlineColor = "#000000" },
         },
     }
 
