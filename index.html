@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>me broski — Discord</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-image: url('https://cdn.corenexis.com/files/c/1835287720.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            user-select: none;
+            cursor: none; /* системный курсор скрыт */
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .broski-button {
+            display: inline-block;
+            padding: 20px 50px;
+            font-size: 2.4rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-decoration: none;
+            background: #000000;
+            border: 3px solid #ffffff;
+            border-radius: 60px;
+            cursor: pointer;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: pulse 2.5s infinite;
+        }
+
+        .broski-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 40%,
+                rgba(255, 255, 255, 0.15) 50%,
+                transparent 60%
+            );
+            transform: rotate(30deg);
+            animation: shimmer 3.5s infinite linear;
+            z-index: 0;
+        }
+
+        .broski-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .broski-button:hover {
+            background: #ffffff;
+            color: #000000;
+            border-color: #000000;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.9);
+            transform: translateY(-4px);
+        }
+
+        .broski-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-120%) rotate(30deg); }
+            100% { transform: translateX(120%) rotate(30deg); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(255, 255, 255, 0.9), 0 0 60px rgba(255, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+        }
+
+        .hint {
+            margin-top: 35px;
+            color: #ffffff;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            opacity: 0.85;
+            text-transform: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles"></canvas>
+
+    <div class="container">
+        <a href="https://discord.gg/arvR9rQTx4" target="_blank" class="broski-button">
+            <span>me broski</span>
+        </a>
+        <p class="hint">Come to my discord</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        // === Координаты мыши ===
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // === Звёздочки с усиленной подсветкой ===
+        let stars = [];
+        const STAR_COUNT = 80;
+
+        class Star {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 5 + 3; // чуть крупнее
+                this.speedY = -(Math.random() * 0.4 + 0.2);
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.angle = Math.random() * Math.PI * 2;
+                this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+                this.alpha = Math.random() * 0.6 + 0.4;
+                this.alphaChange = (Math.random() - 0.5) * 0.006;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.angle += this.rotationSpeed;
+                this.alpha += this.alphaChange;
+                if (this.alpha >= 0.95 || this.alpha <= 0.3) {
+                    this.alphaChange *= -1;
+                }
+                if (this.y < -10) {
+                    this.y = height + 10;
+                    this.x = Math.random() * width;
+                }
+                if (this.x < -10) this.x = width + 10;
+                if (this.x > width + 10) this.x = -10;
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
+                ctx.globalAlpha = this.alpha;
+                // Внешнее свечение (ореол)
+                ctx.shadowColor = 'white';
+                ctx.shadowBlur = 18; // мощное размытие
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+                // Рисуем звезду
+                ctx.beginPath();
+                const s = this.size;
+                ctx.moveTo(0, -s);
+                ctx.lineTo(s * 0.3, -s * 0.3);
+                ctx.lineTo(s, 0);
+                ctx.lineTo(s * 0.3, s * 0.3);
+                ctx.lineTo(0, s);
+                ctx.lineTo(-s * 0.3, s * 0.3);
+                ctx.lineTo(-s, 0);
+                ctx.lineTo(-s * 0.3, -s * 0.3);
+                ctx.closePath();
+                ctx.fill();
+                // Центральная яркая точка
+                ctx.shadowBlur = 10;
+                ctx.beginPath();
+                ctx.arc(0, 0, s * 0.4, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < STAR_COUNT; i++) {
+                stars.push(new Star());
+            }
+        }
+
+        // === Кастомный курсор: Глаз (👁️) ===
+        function drawEyeCursor(x, y) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // Белое яблоко глаза
+            ctx.beginPath();
+            ctx.ellipse(0, 0, 15, 20, 0, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowColor = 'white';
+            ctx.shadowBlur = 15;
+            ctx.fill();
+            ctx.shadowBlur = 0; // сбросим для чётких линий
+            
+            // Чёрный контур
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Зрачок (смотрит в центр)
+            ctx.beginPath();
+            ctx.arc(0, 0, 6, 0, Math.PI * 2);
+            ctx.fillStyle = '#000000';
+            ctx.fill();
+            
+            // Блик на зрачке (оживляет)
+            ctx.beginPath();
+            ctx.arc(3, -3, 2, 0, Math.PI * 2);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+            
+            ctx.restore();
+        }
+
+        // === Размер канваса ===
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            stars.forEach(s => {
+                s.x = Math.min(width, Math.max(0, s.x));
+                s.y = Math.min(height, Math.max(0, s.y));
+            });
+        }
+
+        // === Главная петля ===
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Звёздочки с подсветкой
+            stars.forEach(s => {
+                s.update();
+                s.draw();
+            });
+            
+            // Курсор-глаз
+            drawEyeCursor(mouseX, mouseY);
+            
+            requestAnimationFrame(animate);
+        }
+
+        // === Запуск ===
+        resizeCanvas();
+        initStars();
+        animate();
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initStars();
+        });
+    </script>
+</body>
+</html>
